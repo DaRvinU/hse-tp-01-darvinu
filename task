@@ -16,3 +16,4 @@ find "$input_dir" -type f | while read file; do
     
     cp "$file" "$new_name"
 done
+chmod +x collect_files.sh
