@@ -1,0 +1,18 @@
+#!/bin/bash
+
+input_dir="$1"
+output_dir="$2"
+mkdir -p "$output_dir"
+counter=1
+
+find "$input_dir" -type f | while read file; do
+    filename=$(basename "$file")
+    new_name="$output_dir/$filename"
+    
+    while [ -e "$new_name" ]; do
+        new_name="${output_dir}/${filename%.*}_$counter.${filename##*.}"
+        ((counter++))
+    done
+    
+    cp "$file" "$new_name"
+done
